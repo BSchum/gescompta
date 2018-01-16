@@ -1,0 +1,11 @@
+{
+  "name": "gescompta",
+  "version": "1.0.0",
+  "description": "Gestion de la facturation entre client et fournisseur de produits high-tech",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brice Schumacher",
+  "license": "ISC"
+}
