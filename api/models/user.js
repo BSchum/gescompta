@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var user = mongoose.Schema({
+var UserModel = mongoose.Schema({
   email: {
     type: String,
     index: {
@@ -9,6 +9,18 @@ var user = mongoose.Schema({
   lastname: String,
   firstname: String,
   password: String,
-  adress: String
+  adress: String,
+  deleted: Boolean
 });
-module.exports = mongoose.model('User', user);
+
+UserModel.methods.newUser = function newUser(newUser, res){
+  newUser.save(function(err){
+    if(err){
+      res.json(err.message);
+    }else{
+      res.json("SUCCES");
+    }
+  });
+}
+
+module.exports = mongoose.model('User', UserModel);
