@@ -1,0 +1,19 @@
+{
+  "name": "gescomptafront",
+  "version": "1.0.0",
+  "description": "Front application that consume gescompta API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brice Schumacher",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "less": "^2.7.3"
+  }
+}

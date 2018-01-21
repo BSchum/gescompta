@@ -1,0 +1,14 @@
+.ges-header {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: -1;
+}
+.ges-header .ges-header-logo {
+  margin-top: 20px;
+  font-size: 20px;
+  margin-left: 10px;
+}
