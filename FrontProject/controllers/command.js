@@ -1,16 +1,31 @@
 const router = require('express').Router();
 const request = require('request');
-
-router.get('/:id', function(req, res){
-  request.post({
+//Final: Creer une commande, et y ajoute tout les produits commandé
+router.get('/create', function(req, res){
+  //Creer une commande
+  request.put({
     headers: {'Authorization': req.cookies.token},
     url:'http://localhost:3000/api/private/command/create'
-  }, function(err, res, body){
-    request.post({
-      headers: {'Authorization': req.cookies.token},
-      url:'http://localhost:3000/api/private/command/addProduct'}, function(err, res, body){
-        //TODO send data to push product in command
+  }, function(err, respond, commandCreated){
+    commandCreated = JSON.parse(commandCreated);
+    
+    var cart = JSON.parse(req.cookies.cart);
+    var lastCommand;
+    cart.forEach(function(product){
+      var data = {
+        commandid: commandCreated.commandId,
+        productid: product.product.productid
+      }
+      request.put({
+        headers: {'Authorization': req.cookies.token},
+        url:'http://localhost:3000/api/private/command/addProduct',
+        json: data
+      }, function(error, commandWithAProduct){
+        lastCommand = commandWithAProduct;
       });
     });
+    res.clearCookie('cart');
+    res.render('command.ejs', {command: lastCommand});
   });
-  module.exports = router;
+});
+module.exports = router;

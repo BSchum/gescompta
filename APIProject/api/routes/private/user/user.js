@@ -6,22 +6,16 @@ router.get('/', function(req, res){
   res.send("user.js");
 });
 
-router.post('/create', function(req, res){
-  var newUser = new User({
-    email: req.body.email,
-    lastname: req.body.lastname,
-    firstname: req.body.firstname,
-    password: bcrypt.hashSync(req.body.password, 10),
-    adress: req.body.adress,
-    deleted: false
+router.post('/listOne', function(req, res){
+  User.findOne({product: req.body.id ,deleted: false},function(err, users){
+    res.json(users);
   });
-  newUser.newUser(newUser, res);
 });
 
 router.get('/list', function(req, res){
   User.find({deleted: false},function(err, users){
     res.json(users);
-  })
+  });
 });
 
 router.put('/update', function(req, res){
@@ -51,4 +45,6 @@ router.put('/update', function(req, res){
       }
     })
   });
+  
+  
   module.exports = router;

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+  <% include head.ejs %>
+  <link rel="stylesheet" href="/css/product.min.css">
+</head>
+<body>
+  <% include header.ejs %>
+  <div class="ges-content">
+    <p class="ges-content-title">Votre panier: </p>
+    <div class="row">
+      <% if(typeof products === "object"){ %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Item Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <% var i = 0; %>
+            <% var total = 0; %>
+            
+            <% products.forEach(function(product){ %>
+              <tr>
+                <td><%= product.product.name%></td>
+                <td><%= product.product.description %></td>
+                <td><%= product.product.price %>€</td>
+                <td><%= occurences[i] %></td>
+                <td></td>
+                <td><a href="/cart/deleteProduct/<%=product.product.productid %>">Delete</a></td>
+                <td><a href="/cart/addProduct/<%=product.product.productid %>">Add one more</a></td>
+              </tr>
+              <% total = total + parseInt(product.product.price)*occurences[i]; %>
+              <% i++; %>
+              <%}); %>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><%=total %></td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <a href="/order/create" class="waves-effect waves-light btn blue">Command</a>
+          <%}else{ %>
+            <p>Pas de produit</p>
+            <%} %>
+          </div>
+          
+        </div>
+      </body>
+      </html>

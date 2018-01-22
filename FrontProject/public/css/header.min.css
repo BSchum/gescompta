@@ -6,9 +6,16 @@
   right: 0;
   height: 70px;
   z-index: -1;
+  display: flex;
+  flex-direction: row;
 }
 .ges-header .ges-header-logo {
   margin-top: 20px;
   font-size: 20px;
   margin-left: 10px;
+}
+.ges-header .ges-header-cart {
+  margin-top: 20px;
+  font-size: 20px;
+  margin-left: 85%;
 }

@@ -13,16 +13,16 @@
     <div class="row">
       <% products.forEach(function(product){ %>
         <div class="col s3">
-          <div class="card ges-content-product">
-            <div class="card-content">
-              <span class="card-title"><%= product.name%></span>
-              <p><%= product.description %></p>
-              <p><%= product.price %>€</p>
-            </div>
-            <div class="card-action">
-              <a href="/product/<%= product.productid %>">Buy</a>
-            </div>
-          </div>
+        <div class="card ges-content-product">
+        <div class="card-content">
+        <span class="card-title"><%= product.name%></span>
+        <p><%= product.description %></p>
+        <p><%= product.price %>€</p>
+        </div>
+        <div class="card-action">
+        <a href="/cart/addProduct/<%= product.productid %>">Buy</a>
+        </div>
+        </div>
         </div>
         <%}); %>
       </div>

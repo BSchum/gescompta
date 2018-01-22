@@ -1,4 +1,7 @@
 .ges-content {
-  max-width:600px;
-  margin: 70px auto auto auto;
+  max-width: 70%;
+  margin: 70px auto auto auto !important;
+}
+.ges-content .ges-content-title {
+  font-size: 20px;
 }

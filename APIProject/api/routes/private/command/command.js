@@ -7,7 +7,7 @@ router.get('/', function(req, res){
   res.send("command.js");
 });
 
-router.get('/create', async function(req, res){
+router.put('/create', async function(req, res){
   var id = await Command.MaxIdIncremented();
   var newCommand = new Command({
     commandId: id,
@@ -28,6 +28,7 @@ router.get('/create', async function(req, res){
 });
 
 router.put('/addProduct', function(req, res){
+  console.log(req.body);
   Product.findOne({productid: req.body.productid}, function(err, product){
     if(err){
       res.json(err);
@@ -38,7 +39,9 @@ router.put('/addProduct', function(req, res){
           res.json(err);
         }
         else{
-          res.json('success');
+          Command.findOne({commandId: req.body.commandid} , function(err, command){
+            res.json(command);
+          }).populate({path: 'productlist', match: {deleted: false}});
         }
       });
     }
