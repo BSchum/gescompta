@@ -11,11 +11,15 @@ router.get('/', function(req, res){
 router.post('/create', async function(req, res){
   var id = await Product.MaxIdIncremented();
   console.log('id : '+id);
+  console.log(req.body);
+  var tva = parseInt(req.body.price) * (20/100);
+  console.log(tva);
   var newProduct = new Product({
     productid: id,
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
+    tva: tva,
     deleted: false
   });
   newProduct.newProduct(newProduct, res);

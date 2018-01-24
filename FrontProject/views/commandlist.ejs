@@ -17,34 +17,24 @@
             <table>
               <thead>
                 <tr>
-                  <td>ID</td>
-                  <td>Produit</td>
-                  <td>Prix</td>
-                  <td>Dont TVA</td>
-                  <td>Total</td>
+                  <td>N°</td>
+                  <td>Total en €</td>
                 </tr>
               </thead>
+              
               <tbody>
-                <% command.productlist.forEach(function(product){ %>
+                <% commands.forEach(function(command){ %>
                   <tr>
-                    <td><%= product.productid%></td>
-                    <td><%= product.name%></td>
-                    <td><%= product.price%></td>
-                    <td><%= product.tva%></td>
+                    <td><%= command.commandId %></td>
+                    <td><%= command.totalPrice %></td>
+                    <td><a href="/order/view/<%= command.commandId %>">Voir la commande</a></td>
                   </tr>
                   <% }); %>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total: <%= command.totalPrice%></td>
-                  </tr>
+                  
                 </tbody>
               </table>
             </div>
             <div class="card-action">
-              <a href="<%= fileUrl %>">Voir au format PDF</a>
             </div>
           </div>
         </div>

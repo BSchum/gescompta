@@ -8,7 +8,8 @@ var CommandModel = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  totalPrice: Number
+  totalPrice: Number,
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 CommandModel.statics.MaxIdIncremented = async function MaxIdIncremented(){

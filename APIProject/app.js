@@ -9,7 +9,7 @@ var mongoDB = 'mongodb://127.0.0.1/ProjectDB';
 mongoose.Promise = global.Promise;
 
 require('./config.js');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/pdfs'));
 app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());

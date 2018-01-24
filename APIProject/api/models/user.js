@@ -11,8 +11,7 @@ var UserModel = mongoose.Schema({
   firstname: String,
   password: String,
   adress: String,
-  deleted: Boolean,
-  commands: [{type: mongoose.Schema.Types.ObjectId, ref: 'Command',default: []}]
+  deleted: Boolean
 });
 
 UserModel.methods.newUser = function newUser(newUser, res){

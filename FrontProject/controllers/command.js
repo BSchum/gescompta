@@ -6,12 +6,10 @@ router.get('/create', function(req, res){
   request.put({
     headers: {'Authorization': req.cookies.token},
     url:'http://localhost:3000/api/private/command/create'
-  }, function(err, respond, commandCreated){
+  }, async function(err, respond, commandCreated){
     commandCreated = JSON.parse(commandCreated);
-    
     var cart = JSON.parse(req.cookies.cart);
-    var lastCommand;
-    cart.forEach(function(product){
+    await cart.forEach(function(product){
       var data = {
         commandid: commandCreated.commandId,
         productid: product.product.productid
@@ -20,12 +18,49 @@ router.get('/create', function(req, res){
         headers: {'Authorization': req.cookies.token},
         url:'http://localhost:3000/api/private/command/addProduct',
         json: data
-      }, function(error, commandWithAProduct){
-        lastCommand = commandWithAProduct;
       });
     });
+    
     res.clearCookie('cart');
-    res.render('command.ejs', {command: lastCommand});
+    res.redirect('/order/view/'+commandCreated.commandId);
+  });
+});
+router.get('/view/:id', function(req, res){
+  var commandid = {
+    commandid : req.params.id
+  }
+  request.post({
+    headers: {'Authorization': req.cookies.token},
+    url:'http://localhost:3000/api/private/command/facture',
+    json: commandid
+  }, function(err, url){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log('url');
+      console.log(url);
+    }
+  });
+  
+  var urlAPI = 'http://localhost:3000/api/private/command/list/'+req.params.id
+  request.get({
+    headers: {'Authorization': req.cookies.token},
+    url: urlAPI
+  }, function(err, respond, command){
+    command = JSON.parse(command);
+    var url = 'http://localhost:3000/'+req.params.id+'-'+command.user.lastname+'-'+command.user.firstname+'.pdf';
+    res.render('command.ejs', {command: command, fileUrl: url});
+  });
+});
+
+router.get('/list', function(req, res){
+  request.post({
+    headers: {'Authorization': req.cookies.token},
+    url: 'http://localhost:3000/api/private/command/listbyuser'
+  }, function(err, respond, commands){
+    commands = JSON.parse(commands);
+    res.render('commandlist.ejs', {commands: commands});
   });
 });
 module.exports = router;

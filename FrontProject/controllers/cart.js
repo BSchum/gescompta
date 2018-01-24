@@ -1,8 +1,13 @@
 const router = require('express').Router();
 const request = require('request');
-
+router.use(function(req, res, next){
+  if(req.cookies.token){
+    next();
+  }else{
+    res.redirect('/connect');
+  }
+});
 router.get('/', function(req, res){
-  console.log(req.cookies.cart);
   if(req.cookies.cart){
     cart = JSON.parse(req.cookies.cart);
   }else{
@@ -42,6 +47,7 @@ router.get('/', function(req, res){
 });
 router.get('/clear', function(req, res){
   res.clearCookie('cart');
+  res.clearCookie('token');
   res.json('clear');
 });
 

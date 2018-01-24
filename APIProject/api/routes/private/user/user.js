@@ -6,11 +6,7 @@ router.get('/', function(req, res){
   res.send("user.js");
 });
 
-router.post('/listOne', function(req, res){
-  User.findOne({product: req.body.id ,deleted: false},function(err, users){
-    res.json(users);
-  });
-});
+
 
 router.get('/list', function(req, res){
   User.find({deleted: false},function(err, users){

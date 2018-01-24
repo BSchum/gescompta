@@ -4,11 +4,16 @@ var ProductModel = mongoose.Schema({
     type: Number,
     unique: true,
   },
-  name: String,
+  name:
+  {
+    type: String,
+    unique: true
+  },
   price: {
     type: Number,
     default: 0
   },
+  tva: Number,
   description: String,
   deleted: Boolean
 });
